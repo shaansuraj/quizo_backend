@@ -15,7 +15,8 @@ The **Quizo Backend** is a Node.js-based API built with **Express** and **TypeSc
 - **CRUD Operations**: Create, Read, Update, and Delete quizzes.
 - **PostgreSQL Integration**: Uses a relational database for persistent data.
 - **RESTful API**: Standard RESTful API design principles.
-- **Security**: Uses Helmet for basic security enhancements.
+- **Security Enhancements**: Helmet for security headers, HPP to prevent HTTP Parameter Pollution, and rate limiting.
+- **Rate Limiting & Request Throttling**: Prevents API abuse with `express-rate-limit` and `express-slow-down`.
 - **CORS Handling**: Configured to allow frontend interactions.
 
 ---
@@ -29,6 +30,9 @@ The **Quizo Backend** is a Node.js-based API built with **Express** and **TypeSc
 - **pg (node-postgres)** - PostgreSQL client
 - **Cors** - Handling cross-origin requests
 - **Helmet** - Security headers middleware
+- **HPP (HTTP Parameter Pollution Prevention)** - Prevents query manipulation attacks
+- **express-rate-limit** - Prevents excessive requests
+- **express-slow-down** - Gradually increases response time for repeated requests
 - **Dotenv** - Environment variable management
 
 ---
@@ -136,57 +140,14 @@ The API should now be running at **http://localhost:5000**.
 | `PUT`  | `/api/quizzes/:id` | Updates an existing quiz |
 | `DELETE` | `/api/quizzes/:id` | Deletes a quiz |
 
-#### Create a Quiz
-##### Request Example
-```json
-{
-  "title": "My First Quiz",
-  "description": "This is a test quiz.",
-  "teacher_id": 1
-}
-```
+---
 
-##### Response Example
-```json
-{
-  "id": 1,
-  "title": "My First Quiz",
-  "description": "This is a test quiz.",
-  "teacher_id": 1,
-  "created_at": "2025-02-15T10:00:00.000Z"
-}
-```
-
-#### Get All Quizzes
-##### Response Example
-```json
-[
-  {
-    "id": 1,
-    "title": "My First Quiz",
-    "description": "This is a test quiz.",
-    "teacher_id": 1,
-    "created_at": "2025-02-15T10:00:00.000Z"
-  }
-]
-```
-
-#### Update a Quiz
-##### Request Example
-```json
-{
-  "title": "Updated Quiz Title",
-  "description": "New description content"
-}
-```
-
-#### Delete a Quiz
-##### Response Example
-```json
-{
-  "message": "Quiz deleted successfully."
-}
-```
+## 🛡️ Security Enhancements
+- **Rate Limiting (`express-rate-limit`)** → Prevents excessive API calls (100 requests per 15 min per IP).
+- **Slow Down Requests (`express-slow-down`)** → Increases response time for repeated requests to prevent abuse.
+- **Helmet Security Headers** → Protects against known vulnerabilities.
+- **CORS Restricted** → Only allows requests from `https://quizo-frontend.vercel.app`.
+- **HPP (`hpp`)** → Prevents HTTP Parameter Pollution attacks.
 
 ---
 
@@ -214,7 +175,7 @@ This project is open-source under the **MIT License**.
 ## 🎯 Summary
 - 🛠 **Built with:** Node.js, Express, PostgreSQL, TypeScript
 - 🔗 **Live API Hosted at:** [https://quizo-backend-brm8.onrender.com](https://quizo-backend-brm8.onrender.com)
-- 🎯 **Key Features:** Authentication, Quiz CRUD, PostgreSQL integration
+- 🎯 **Key Features:** Authentication, Quiz CRUD, PostgreSQL integration, Security Enhancements
 - 🚀 **How to run:** Clone, install dependencies, start the server
 
 Enjoy building your Quiz Management System with Quizo! 🚀
