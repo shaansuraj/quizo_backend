@@ -26,7 +26,7 @@ function createApp(): Application {
   // Configuring CORS to allow requests from any origin
   app.use(
     cors({
-      origin: '*', // Allowing any origin
+      origin: 'https://quizo-frontend.vercel.app', // Allowing only the frotnend
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
     })
